@@ -1,4 +1,14 @@
 options:
     version: 1.1
+    name: test
 
-test
+On load:
+    set {_pastebin::*} to url "https://raw.githubusercontent.com/TheMikeV/test123/main/test.txt"'s contents
+    send "http://pastebin.com/raw/DP0fs93i: %{_pastebin::2}%" to console
+    if "%{_pastebin::2}%" contains "{@version}":
+        send "Skrypt aktualny {@name}" to console
+    else:
+        send "Skrypt nie aktualny {@name}" to console
+        skutil delete file "/home/container/plugins/Skript/scripts/testv1.sk"
+        download file from "https://raw.githubusercontent.com/TheMikeV/test123/main/test.txt" to file "/home/container/plugins/Skript/scripts/testv1.sk"
+    
